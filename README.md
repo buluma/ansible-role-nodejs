@@ -1,6 +1,6 @@
 # Ansible Role: Node.js
 
-[![CI](https://github.com/buluma/ansible-role-nodejs/workflows/CI/badge.svg?event=push)](https://github.com/buluma/ansible-role-nodejs/actions?query=workflow%3ACI)
+[![CI](https://github.com/buluma/ansible-role-nodejs/workflows/CI/badge.svg?event=push)](https://github.com/buluma/ansible-role-nodejs/actions?query=workflow%3ACI) ![Ansible Role](https://img.shields.io/ansible/role/d/54975)
 
 Installs Node.js on RHEL/CentOS or Debian/Ubuntu.
 
