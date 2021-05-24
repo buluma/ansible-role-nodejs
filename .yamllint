@@ -5,6 +5,7 @@ rules:
   line-length:
     max: 220
     level: warning
+   trailing-spaces: disable
 
 ignore: |
   .github/stale.yml
