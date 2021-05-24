@@ -3,10 +3,14 @@ extends: default
 
 rules:
   line-length:
-    max: 220
+    max: 240
     level: warning
-   trailing-spaces: disable
-
-ignore: |
-  .github/stale.yml
-  .travis.yml
+  new-line-at-end-of-file: enable
+  new-lines: enable
+  octal-values: disable
+  quoted-strings: disable
+  trailing-spaces: disable
+  comments-indentation: enable  # don't bother me with this rule
+  indentation:
+    indent-sequences: whatever
+  truthy: false
