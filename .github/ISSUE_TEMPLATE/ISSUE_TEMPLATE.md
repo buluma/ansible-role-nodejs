@@ -1,7 +1,10 @@
 ---
 name: Linting Failed
-about: Linting Failed
-title: "[DATE]: [FEATURE NAME]"
-labels: tracking issue, needs triage
+about: Lint Check
+title: "[DATE]: Lint Check Failed"
+labels: needs triage, tracking issue
 assignees: buluma
+
 ---
+
+Issue desc
