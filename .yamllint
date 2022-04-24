@@ -2,15 +2,15 @@
 extends: default
 
 rules:
-  line-length:
-    max: 240
-    level: warning
-  new-line-at-end-of-file: enable
-  new-lines: enable
-  octal-values: disable
-  quoted-strings: disable
-  trailing-spaces: disable
-  comments-indentation: enable  # don't bother me with this rule
-  indentation:
-    indent-sequences: whatever
-  truthy: false
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  line-length: disable
+  truthy: disable
+
+ignore: |
+  .tox/
+  .cache/
