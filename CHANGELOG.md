@@ -77,6 +77,12 @@
 - \[DATE\]: Lint Check Failed [\#2](https://github.com/buluma/ansible-role-nodejs/issues/2)
 - \[DATE\]: \[FEATURE NAME\] [\#1](https://github.com/buluma/ansible-role-nodejs/issues/1)
 
+**Merged pull requests:**
+
+- Bump actions/setup-python from 2 to 3 [\#73](https://github.com/buluma/ansible-role-nodejs/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 2 to 3 [\#72](https://github.com/buluma/ansible-role-nodejs/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump buluma/gh-action-auto-merge-dependabot-updates from 1.0.4 to 1.0.5 [\#71](https://github.com/buluma/ansible-role-nodejs/pull/71) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.0.4](https://github.com/buluma/ansible-role-nodejs/tree/v1.0.4) (2022-03-07)
 
 [Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v1.0.3...v1.0.4)
