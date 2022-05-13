@@ -10,13 +10,9 @@ variables:
 
 molecule:
   stage: build
+  allow_failure: true
   script:
     - image=${image} tag=${tag} molecule test
-  artifacts:
-    name: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    paths:
-      - /
-    expire_in: 1 day
   retry: 1
   parallel:
     matrix:
@@ -34,6 +30,8 @@ molecule:
         tag: "bionic"
       - image: "docker-ubuntu-systemd"
         tag: "focal"
+      - image: "docker-ubuntu-systemd"
+        tag: "jammy"
 
 testing:
   stage: test
@@ -59,6 +57,8 @@ testing:
         tag: "bionic"
       - image: "docker-ubuntu-systemd"
         tag: "focal"
+      - image: "docker-ubuntu-systemd"
+        tag: "jammy"
 
 galaxy:
   stage: deploy
@@ -88,6 +88,8 @@ role_testing:
         tag: "bionic"
       - image: "docker-ubuntu-systemd"
         tag: "focal"
+      - image: "docker-ubuntu-systemd"
+        tag: "jammy"
 
 release_job:
   stage: .post
@@ -101,3 +103,8 @@ release_job:
     tag_name: $CI_COMMIT_TAG
     name: 'Release $CI_COMMIT_TAG'
     description: 'Release created using the release-cli.'
+  artifacts:
+    name: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
+    paths:
+      - /
+    expire_in: 1 day
