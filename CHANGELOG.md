@@ -6,6 +6,7 @@
 
 **Closed issues:**
 
+- Add to tracker [\#74](https://github.com/buluma/ansible-role-nodejs/issues/74)
 - \[DATE\]: Lint Check Failed [\#70](https://github.com/buluma/ansible-role-nodejs/issues/70)
 - \[DATE\]: Lint Check Failed [\#69](https://github.com/buluma/ansible-role-nodejs/issues/69)
 - \[DATE\]: Lint Check Failed [\#68](https://github.com/buluma/ansible-role-nodejs/issues/68)
