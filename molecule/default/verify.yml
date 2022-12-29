@@ -5,7 +5,7 @@
 
   tasks:
     - name: Check nodejs version.
-      command: nodejs --version
+      command: node -v
       register: nodejsversion
 
     - name: Verify nodejs version.
