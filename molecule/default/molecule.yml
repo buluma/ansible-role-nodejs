@@ -1,18 +1,32 @@
 ---
+#
+# Ansible managed
+#
 role_name_check: 1
 dependency:
   name: galaxy
+  options:
+    role-file: requirements.yml
+    requirements-file: requirements.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
 driver:
   name: docker
 platforms:
-  - name: instance
+  - name: "nodejs-${image:-docker-centos7-ansible}-${tag:-latest}${TOX_ENVNAME}"
     image: "buluma/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
+    tty: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_legacy_silent
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
