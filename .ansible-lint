@@ -21,4 +21,4 @@ warn_list:  # or 'skip_list' to silence them completely
   - fqcn[action-core]  # Use FQCN for builtin actions.
   - name[missing]  # Rule for checking task and play names.
   - yaml[document-start]  # Violations reported by yamllint.
-  - no-handler # Tasks that run when changed likely handlers.
+  - no-handler  # Tasks that run when changed likely handlers.
