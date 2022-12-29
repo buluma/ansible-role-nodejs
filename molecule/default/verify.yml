@@ -9,4 +9,4 @@
       register: nodejsversion
 
     - name: Verify nodejs version.
-      debug: var=nodejsversion
+      debug: var=nodejsversion.stdout
