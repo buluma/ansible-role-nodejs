@@ -6,7 +6,7 @@ variables:
 
 molecule:
   stage: build
-  allow_failure: true
+  allow_failure: false
   script:
     - image=${image} tag=${tag} molecule test
   retry: 1
@@ -31,6 +31,7 @@ molecule:
 
 testing:
   stage: test
+  allow_failure: true
   needs: []
   script:
     - image=${image} tag=${tag} molecule test
