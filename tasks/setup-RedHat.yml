@@ -1,3 +1,4 @@
+---
 - name: Set up the Nodesource RPM directory.
   set_fact:
     nodejs_rhel_rpm_dir: "pub_{{ nodejs_version }}"
