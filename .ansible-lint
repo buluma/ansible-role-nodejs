@@ -3,22 +3,17 @@
 # Ansible managed
 #
 exclude_paths:
-  - ./meta/preferences.yml
-  - ./molecule/default/prepare.yml
-  - ./molecule/default/converge.yml
-  - ./molecule/default/verify.yml
-  - ./molecule/default/collections.yml
-  - ./molecule/default/playbook-latest
-  - ./.tox
-  - ./.cache
+  - molecule/default/prepare.yml
+  - molecule/default/converge.yml
+  - molecule/default/verify.yml
+  - molecule/default/collections.yml
+  - .tox
+  - .cache
+  - .github
+  - requirements.yml
 
 skip_list:
-  - fqcn-builtins
+  - yaml[truthy]
 
-warn_list:  # or 'skip_list' to silence them completely
-  - experimental  # all rules tagged as experimental
-  - fqcn[action]  # Use FQCN for builtin actions.
-  - fqcn[action-core]  # Use FQCN for builtin actions.
-  - name[missing]  # Rule for checking task and play names.
-  - yaml[document-start]  # Violations reported by yamllint.
-  - no-handler  # Tasks that run when changed likely handlers.
+enable_list:
+  - name[prefix]

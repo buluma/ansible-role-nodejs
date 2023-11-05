@@ -2,13 +2,14 @@
 
 Node.js installation for Linux
 
-|GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
-|------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-nodejs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-nodejs/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-nodejs/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-nodejs)|[![quality](https://img.shields.io/ansible/quality/54975)](https://galaxy.ansible.com/buluma/nodejs)|[![downloads](https://img.shields.io/ansible/role/d/54975)](https://galaxy.ansible.com/buluma/nodejs)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/pulls/)|
+|GitHub|GitLab|Downloads|Version|Issues|Pull Requests|
+|------|------|-------|-------|------|-------------|
+|[![github](https://github.com/buluma/ansible-role-nodejs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-nodejs/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-nodejs/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-nodejs)|[![downloads](https://img.shields.io/ansible/role/d/4780)](https://galaxy.ansible.com/buluma/nodejs)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
-This example is taken from `molecule/default/converge.yml` and is tested on each push, pull request and release.
+This example is taken from [`molecule/default/converge.yml`](https://github.com/buluma/ansible-role-nodejs/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
+
 ```yaml
 ---
 - name: Converge
@@ -16,11 +17,13 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
   become: true
 
   vars:
+    # nodejs_version: "18.x"
     nodejs_install_npm_user: root
     npm_config_prefix: /root/.npm-global
     npm_config_unsafe_perm: "true"
     nodejs_npm_global_packages:
-      - node-sass
+      - name: node-sass
+        version: 7.0.3
       - name: jslint
         version: 0.12.0
       - name: yo
@@ -34,15 +37,17 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     - role: buluma.nodejs
 ```
 
+Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
 
 ## [Role Variables](#role-variables)
 
-The default values for the variables are set in `defaults/main.yml`:
+The default values for the variables are set in [`defaults/main.yml`](https://github.com/buluma/ansible-role-nodejs/blob/master/defaults/main.yml):
+
 ```yaml
 ---
 # Set the version of Node.js to install ("12.x", "13.x", "14.x", "15.x", etc.).
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
-nodejs_version: "14.x"
+nodejs_version: "16.x"
 
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
@@ -74,7 +79,7 @@ nodejs_generate_etc_profile: "true"
 
 ## [Requirements](#requirements)
 
-- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-nodejs/blob/main/requirements.txt).
+- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-nodejs/blob/master/requirements.txt).
 
 
 ## [Context](#context)
@@ -91,17 +96,15 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 
 |container|tags|
 |---------|----|
-|el|all|
-|debian|all|
-|ubuntu|all|
+|[EL](https://hub.docker.com/repository/docker/buluma/enterpriselinux/general)|all|
+|[Debian](https://hub.docker.com/repository/docker/buluma/debian/general)|all|
+|[Ubuntu](https://hub.docker.com/repository/docker/buluma/ubuntu/general)|all|
 
 The minimum version of Ansible required is 2.4, tests have been done to:
 
 - The previous version.
 - The current version.
 - The development version.
-
-
 
 If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-nodejs/issues)
 
@@ -111,8 +114,14 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 ## [License](#license)
 
-license (Apache-2.0)
+[Apache-2.0](https://github.com/buluma/ansible-role-nodejs/blob/master/LICENSE).
 
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
+Please consider [sponsoring me](https://github.com/sponsors/buluma).
+
+### [Special Thanks](#special-thanks)
+
+Template inspired by [Robert de Bock](https://github.com/robertdebock)
