@@ -30,12 +30,12 @@
   register: node_repo
 
 - name: setup-RedHat | Update package cache if repo was added.
-  yum: update_cache=yes
+  ansible.builtin.yum: update_cache=yes
   when: node_repo is changed
   tags: ['skip_ansible_lint']
 
 - name: setup-RedHat | Ensure Node.js AppStream module is disabled (CentOS 8+).
-  command: yum module disable -y nodejs
+  ansible.builtin.command: yum module disable -y nodejs
   args:
     warn: false
   register: module_disable
