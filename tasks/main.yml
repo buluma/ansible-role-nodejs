@@ -1,9 +1,11 @@
 ---
-- ansible.builtin.import_tasks:
+- name: Setup RedHat
+  ansible.builtin.import_tasks:
     file: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- ansible.builtin.import_tasks:
+- name: Setup Debian
+  ansible.builtin.import_tasks:
     file: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
