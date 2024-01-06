@@ -2,18 +2,20 @@
 
 ## [Unreleased](https://github.com/buluma/ansible-role-nodejs/tree/HEAD)
 
-[Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/1.0.5...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v2.0.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump buluma/gh-action-auto-merge-dependabot-updates from 1.0.5 to 1.0.8 [\#84](https://github.com/buluma/ansible-role-nodejs/pull/84) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 3 to 4 [\#83](https://github.com/buluma/ansible-role-nodejs/pull/83) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.0.0](https://github.com/buluma/ansible-role-nodejs/tree/v2.0.0) (2024-01-05)
+
+[Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v1.0.4...v2.0.0)
 
 **Closed issues:**
 
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#82](https://github.com/buluma/ansible-role-nodejs/issues/82)
-
-## [1.0.5](https://github.com/buluma/ansible-role-nodejs/tree/1.0.5) (2023-12-09)
-
-[Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v1.0.4...1.0.5)
-
-**Closed issues:**
-
 - Add to tracker [\#74](https://github.com/buluma/ansible-role-nodejs/issues/74)
 - \[DATE\]: Lint Check Failed [\#70](https://github.com/buluma/ansible-role-nodejs/issues/70)
 - \[DATE\]: Lint Check Failed [\#69](https://github.com/buluma/ansible-role-nodejs/issues/69)
