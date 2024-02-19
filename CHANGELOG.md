@@ -25,6 +25,7 @@
 
 - Bump buluma/gh-action-auto-merge-dependabot-updates from 1.0.5 to 1.0.8 [\#84](https://github.com/buluma/ansible-role-nodejs/pull/84) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump actions/checkout from 3 to 4 [\#83](https://github.com/buluma/ansible-role-nodejs/pull/83) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 2 to 3 [\#72](https://github.com/buluma/ansible-role-nodejs/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v2.0.0](https://github.com/buluma/ansible-role-nodejs/tree/v2.0.0) (2024-01-05)
 
@@ -108,7 +109,6 @@
 **Merged pull requests:**
 
 - Bump actions/setup-python from 2 to 3 [\#73](https://github.com/buluma/ansible-role-nodejs/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump actions/checkout from 2 to 3 [\#72](https://github.com/buluma/ansible-role-nodejs/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump buluma/gh-action-auto-merge-dependabot-updates from 1.0.4 to 1.0.5 [\#71](https://github.com/buluma/ansible-role-nodejs/pull/71) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.0.4](https://github.com/buluma/ansible-role-nodejs/tree/v1.0.4) (2022-03-07)
