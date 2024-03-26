@@ -22,7 +22,7 @@
   register: node_repo
 
 - name: setup-Debian | Update apt cache if repo was added.
-  ansible.builtin.apt: update_cache=yes
+  ansible.builtin.apt: update_cache=true
   when: node_repo is changed
   tags: ['skip_ansible_lint']
 

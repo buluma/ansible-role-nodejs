@@ -30,7 +30,7 @@
   register: node_repo
 
 - name: setup-RedHat | Update package cache if repo was added.
-  ansible.builtin.yum: update_cache=yes
+  ansible.builtin.yum: update_cache=true
   when: node_repo is changed
   tags: ['skip_ansible_lint']
 
