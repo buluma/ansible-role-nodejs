@@ -5,4 +5,4 @@
 repository:
   description: Node.js installation for Linux
   homepage: https://buluma.github.io/
-  topics: development, web, javascript, js, node, npm, nodejs, ansible, molecule, tox, playbook
+  topics: development, web, javascript, js, node, npm, nodejs, ansible, molecule, playbook
