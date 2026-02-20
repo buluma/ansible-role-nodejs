@@ -2,10 +2,10 @@
 galaxy_info:
   author: buluma
   role_name: nodejs
-  description: 'Node.js installation for Linux'
+  description: "Node.js installation for Linux"
   license: Apache-2.0
   company: ShadowNet
-  min_ansible_version: '2.4
+  min_ansible_version: "2.4"
   platforms:
     - name: EL
       versions:
