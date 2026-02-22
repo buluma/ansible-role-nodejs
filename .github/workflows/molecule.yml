@@ -46,8 +46,6 @@ jobs:
             tag: "debian_latest"
           - image: "docker-molecule-images"
             tag: "bookworm"
-          - image: "docker-molecule-images"
-            tag: "bullseye"
     steps:
       - name: checkout
         uses: actions/checkout@v6
