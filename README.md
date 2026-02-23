@@ -12,42 +12,42 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-  - name: Converge
-    hosts: all
-    become: true
+- name: Converge
+  hosts: all
+  become: true
 
-    vars:
+  vars:
     # nodejs_version: "18.x"
-      nodejs_install_npm_user: root
-      npm_config_prefix: /root/.npm-global
-      npm_config_unsafe_perm: "true"
-      nodejs_npm_global_packages:
-        - name: node-sass
-          version: 7.0.3
-        - name: jslint
-          version: 0.12.0
-        - name: yo
+    nodejs_install_npm_user: root
+    npm_config_prefix: /root/.npm-global
+    npm_config_unsafe_perm: "true"
+    nodejs_npm_global_packages:
+    - name: node-sass
+      version: 7.0.3
+    - name: jslint
+      version: 0.12.0
+    - name: yo
 
-    pre_tasks:
-      - name: Update apt cache.
-        apt: update_cache=true cache_valid_time=600
-        when: ansible_os_family == 'Debian'
+  pre_tasks:
+  - name: Update apt cache.
+    apt: update_cache=true cache_valid_time=600
+    when: ansible_os_family == 'Debian'
 
-    roles:
-      - role: buluma.nodejs
+  roles:
+  - role: buluma.nodejs
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-nodejs/blob/master/molecule/default/prepare.yml):
 
 ```yaml
 ---
-  - name: Prepare
-    hosts: all
-    become: true
-    gather_facts: false
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: false
 
-    roles:
-      - role: buluma.bootstrap
+  roles:
+  - role: buluma.bootstrap
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
