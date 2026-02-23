@@ -1,12 +1,12 @@
 ---
-- name: Verify
-  hosts: all
-  become: true
+  - name: Verify
+    hosts: all
+    become: true
 
-  tasks:
-    - name: Check nodejs version.
-      command: node -v
-      register: nodejsversion
+    tasks:
+      - name: Check nodejs version.
+        command: node -v
+        register: nodejsversion
 
-    - name: Verify nodejs version.
-      debug: var=nodejsversion.stdout
+      - name: Verify nodejs version.
+        debug: var=nodejsversion.stdout

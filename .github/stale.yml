@@ -40,7 +40,8 @@ pulls:
     This pull request is false longer marked for closure.
 
   closeComment: >-
-    This pull request has been closed due to inactivity. If you feel this is in error, please reopen the pull request or file a new PR with the relevant details.
+    This pull request has been closed due to inactivity. If you feel this is in error,
+    please reopen the pull request or file a new PR with the relevant details.
 
 issues:
   markComment: |-
@@ -50,4 +51,5 @@ issues:
     This issue is false longer marked for closure.
 
   closeComment: >-
-    This issue has been closed due to inactivity. If you feel this is in error, please reopen the issue or file a new issue with the relevant details.
+    This issue has been closed due to inactivity. If you feel this is in error, please
+    reopen the issue or file a new issue with the relevant details.
