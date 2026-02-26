@@ -1,10 +1,10 @@
-# Ansible role [nodejs](https://galaxy.ansible.com/ui/standalone/roles/buluma/nodejs/documentation)
+# [Ansible role nodejs](#ansible-role-nodejs)
 
 Node.js installation for Linux
 
-|GitHub|Version|Issues|Pull Requests|Downloads|
-|------|-------|------|-------------|---------|
-|[![github](https://github.com/buluma/ansible-role-nodejs/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-nodejs/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/pulls/)|[![Ansible Role](https://img.shields.io/ansible/role/d/buluma/nodejs)](https://galaxy.ansible.com/ui/standalone/roles/buluma/nodejs/documentation)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/buluma/ansible-role-nodejs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-nodejs/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-nodejs/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-nodejs)|[![downloads](https://img.shields.io/ansible/role/d/buluma/nodejs)](https://galaxy.ansible.com/buluma/nodejs)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-nodejs.svg)](https://github.com/buluma/ansible-role-nodejs/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -22,19 +22,19 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     npm_config_prefix: /root/.npm-global
     npm_config_unsafe_perm: "true"
     nodejs_npm_global_packages:
-      - name: node-sass
-        version: 7.0.3
-      - name: jslint
-        version: 0.12.0
-      - name: yo
+    - name: node-sass
+      version: 7.0.3
+    - name: jslint
+      version: 0.12.0
+    - name: yo
 
   pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+  - name: Update apt cache.
+    apt: update_cache=true cache_valid_time=600
+    when: ansible_os_family == 'Debian'
 
   roles:
-    - role: buluma.nodejs
+  - role: buluma.nodejs
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-nodejs/blob/master/molecule/default/prepare.yml):
@@ -47,7 +47,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   gather_facts: false
 
   roles:
-    - role: buluma.bootstrap
+  - role: buluma.bootstrap
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -98,16 +98,15 @@ nodejs_generate_etc_profile: "true"
 
 The following roles are used to prepare a system. You can prepare your system in another way.
 
-| Requirement | GitHub | Version |
+| Requirement | GitHub | GitLab |
 |-------------|--------|--------|
-|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Ansible Molecule](https://github.com/buluma/ansible-role-bootstrap/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions/workflows/molecule.yml)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-bootstrap.svg)](https://github.com/shadowwalker/ansible-role-bootstrap)|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab](https://gitlab.com/shadowwalker/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-bootstrap)|
 
 ## [Context](#context)
 
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
+This role is part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
 
 Here is an overview of related roles:
-
 ![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-nodejs/png/requirements.png "Dependencies")
 
 ## [Compatibility](#compatibility)
@@ -119,22 +118,19 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |[EL](https://hub.docker.com/r/buluma/enterpriselinux)|all|
 |[Debian](https://hub.docker.com/r/buluma/debian)|all|
 
-The minimum version of Ansible required is 2.4, tests have been done to:
+The minimum version of Ansible required is 2.4, tests have been done on:
 
 - The previous version.
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-nodejs/issues)
-
-## [Changelog](#changelog)
-
-[Role History](https://github.com/buluma/ansible-role-nodejs/blob/master/CHANGELOG.md)
+If you find issues, please register them on [GitHub](https://github.com/buluma/ansible-role-nodejs/issues).
 
 ## [License](#license)
 
-[Apache-2.0](https://github.com/buluma/ansible-role-nodejs/blob/master/LICENSE)
+[Apache-2.0](https://github.com/buluma/ansible-role-nodejs/blob/master/LICENSE).
 
 ## [Author Information](#author-information)
 
-[Shadow Walker](https://buluma.github.io/)
+[buluma](https://buluma.github.io/)
+

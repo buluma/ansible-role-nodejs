@@ -4,6 +4,11 @@
 
 [Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v2.2.0...HEAD)
 
+**Closed issues:**
+
+- Update action [\#81](https://github.com/buluma/ansible-role-nodejs/issues/81)
+- rebuild action [\#80](https://github.com/buluma/ansible-role-nodejs/issues/80)
+
 **Merged pull requests:**
 
 - Bump dependabot/fetch-metadata from 1 to 2 [\#93](https://github.com/buluma/ansible-role-nodejs/pull/93) ([dependabot[bot]](https://github.com/apps/dependabot))

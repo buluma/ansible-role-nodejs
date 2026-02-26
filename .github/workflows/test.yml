@@ -6,13 +6,13 @@ jobs:
     name: Buluma YAML lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Buluma YAML lint
-        uses: ./
-      - name: Create Issue
-        if: failure()
-        uses: buluma/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          filename: .github/ISSUE_TEMPLATE/ISSUE_TEMPLATE.md
+    - uses: actions/checkout@v6
+    - name: Buluma YAML lint
+      uses: ./
+    - name: Create Issue
+      if: failure()
+      uses: buluma/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        filename: .github/ISSUE_TEMPLATE/ISSUE_TEMPLATE.md
