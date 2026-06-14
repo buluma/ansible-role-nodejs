@@ -7,10 +7,10 @@
     state: present
 
 - name: setup-Debian | Add Nodesource apt key.
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
-    id: "68576280"
-    state: present
+    dest: /etc/apt/trusted.gpg.d/nodejs.asc
+    mode: "0644"
 
 - name: setup-Debian | Add NodeSource repositories for Node.js.
   ansible.builtin.apt_repository:
