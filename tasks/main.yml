@@ -2,12 +2,12 @@
 - name: Setup RedHat
   ansible.builtin.import_tasks:
     file: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: ansible_facts['os_family'] == 'RedHat'
 
 - name: Setup Debian
   ansible.builtin.import_tasks:
     file: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: Define nodejs_install_npm_user
   ansible.builtin.set_fact:
