@@ -1,5 +1,9 @@
 # Changelog
 
+## [v26.6.1](https://github.com/buluma/ansible-role-nodejs/tree/v26.6.1) (2026-06-14)
+
+[Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v26.6.0...v26.6.1)
+
 ## [v26.6.0](https://github.com/buluma/ansible-role-nodejs/tree/v26.6.0) (2026-06-14)
 
 [Full Changelog](https://github.com/buluma/ansible-role-nodejs/compare/v2.2.0...v26.6.0)
