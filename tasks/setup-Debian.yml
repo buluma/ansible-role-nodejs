@@ -35,6 +35,7 @@
   ansible.builtin.apt:
     update_cache: true
   when: node_repo is changed
+  tags: ["skip_ansible_lint"]
 
 - name: setup-Debian | Ensure Node.js and npm are installed.
   ansible.builtin.apt:
