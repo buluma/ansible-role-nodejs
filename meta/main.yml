@@ -7,12 +7,6 @@ galaxy_info:
   company: ShadowNet
   min_ansible_version: "2.12"
   platforms:
-    - name: EL
-      versions:
-        - all
-    - name: Debian
-      versions:
-        - all
   galaxy_tags:
     - development
     - web
