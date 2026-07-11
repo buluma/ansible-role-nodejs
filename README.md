@@ -22,16 +22,19 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     npm_config_prefix: /root/.npm-global
     npm_config_unsafe_perm: "true"
     nodejs_npm_global_packages:
-      - name: node-sass
-        version: 7.0.3
+      - name: typescript
+        version: 5.0.4
       - name: jslint
         version: 0.12.0
-      - name: yo
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+
+        update_cache: true
+
+        cache_valid_time: 600
+      when: ansible_facts['os_family'] == 'Debian'
 
   roles:
     - role: buluma.nodejs
@@ -45,6 +48,13 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   hosts: all
   become: true
   gather_facts: false
+
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo"
+      become: false
+      changed_when: false
+      failed_when: false
 
   roles:
     - role: buluma.bootstrap
@@ -60,7 +70,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 ---
 # Set the version of Node.js to install ("12.x", "13.x", "14.x", "15.x", etc.).
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
-nodejs_version: "16.x"
+nodejs_version: "20.x"
 
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
@@ -87,7 +97,7 @@ nodejs_package_json_path: ""
 
 # Whether or not /etc/profile.d/npm.sh (globa) must be generated.
 # Set to false if you need to handle this manually with a per-user install.
-nodejs_generate_etc_profile: "true"
+nodejs_generate_etc_profile: true
 ```
 
 ## [Requirements](#requirements)
@@ -112,14 +122,16 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
-The minimum version of Ansible required is 2.4, tests have been done on:
+The minimum version of Ansible required is 2.12, tests have been done on:
 
 - The previous version.
 - The current version.
@@ -135,6 +147,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-nodejs/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-nodejs
