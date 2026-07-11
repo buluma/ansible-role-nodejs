@@ -17,18 +17,16 @@
 
 - name: setup-RedHat | Add Nodesource repositories for Node.js (CentOS < 7).
   ansible.builtin.dnf:
-    name:
-      "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_facts['distribution_major_version'] }}/{{ ansible_facts['architecture'] }}/nodesource-release-el{{ ansible_facts['distribution_major_version']
-      }}-1.noarch.rpm"
+    name: "http://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_facts['distribution_major_version'] }}/{{ ansible_facts['architecture'] }}/nodesource-release-el{{
+      ansible_facts['distribution_major_version'] }}-1.noarch.rpm"
     state: present
   when: ansible_facts['distribution_major_version'] | int < 7
   register: node_repo
 
 - name: setup-RedHat | Add Nodesource repositories for Node.js (CentOS 7+).
   ansible.builtin.dnf:
-    name:
-      "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_facts['distribution_major_version'] }}/{{ ansible_facts['architecture'] }}/nodesource-release-el{{ ansible_facts['distribution_major_version']
-      }}-1.noarch.rpm"
+    name: "https://rpm.nodesource.com/{{ nodejs_rhel_rpm_dir }}/el/{{ ansible_facts['distribution_major_version'] }}/{{ ansible_facts['architecture'] }}/nodesource-release-el{{
+      ansible_facts['distribution_major_version'] }}-1.noarch.rpm"
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 7
   register: node_repo
