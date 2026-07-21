@@ -37,6 +37,15 @@
   when: node_repo is changed
   tags: ["skip_ansible_lint"]
 
+- name: setup-Debian | Pin apt to prefer NodeSource's nodejs over the distro package.
+  ansible.builtin.copy:
+    dest: /etc/apt/preferences.d/nodesource
+    content: |
+      Package: *
+      Pin: origin deb.nodesource.com
+      Pin-Priority: 600
+    mode: "0644"
+
 - name: setup-Debian | Ensure Node.js and npm are installed.
   ansible.builtin.apt:
     name: nodejs

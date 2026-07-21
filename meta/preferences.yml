@@ -1,6 +1,10 @@
 ---
 # Pins the CI platform/version matrix for this role. Without this, ansible-generator
 # falls back to default_platforms and silently discards these choices on regenerate.
+# Fedora is excluded entirely: NodeSource only publishes "el"-numbered RPM
+# repos (RHEL/CentOS/Rocky/AlmaLinux/Amazon), nothing for Fedora, so this
+# role's RedHat setup path (which os_family routes Fedora into) has never
+# actually worked there.
 platforms:
   - name: EL
     versions:
@@ -9,12 +13,6 @@ platforms:
   - name: Debian
     versions:
       - all
-  - name: Fedora
-    versions:
-      # Excludes 45: it ships Python 3.15.0b3, whose dataclasses module
-      # dropped _is_type, breaking ansible-core's AnsiballZ module wrapper.
-      - "44"
-      - "43"
   - name: Ubuntu
     versions:
       - all
