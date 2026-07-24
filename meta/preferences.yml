@@ -6,9 +6,12 @@
 # role's RedHat setup path (which os_family routes Fedora into) has never
 # actually worked there.
 platforms:
+  # EL10 excluded too: NodeSource's RPM signing key has a SHA-1
+  # self-signature from 2014, which RHEL10's default crypto policy
+  # rejects on import ("No binding signature") - a vendor-side problem,
+  # not something fixable in this role.
   - name: EL
     versions:
-      - "10"
       - "9"
   - name: Debian
     versions:
