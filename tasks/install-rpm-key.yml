@@ -112,6 +112,18 @@
         fingerprint: "{{ nodejs_rpm_key_fingerprint }}"
         state: present
   always:
+    - name: install-rpm-key | Stop the gpg-agent started by the key import
+      ansible.builtin.command:
+        argv:
+          - gpgconf
+          - --homedir
+          - "{{ nodejs_rpm_key_dir.path }}"
+          - --kill
+          - gpg-agent
+      changed_when: false
+      failed_when: false
+      when: nodejs_rpm_key_dir.path is defined
+
     - name: install-rpm-key | Remove temporary directory for the Nodesource RPM key.
       ansible.builtin.file:
         path: "{{ nodejs_rpm_key_dir.path }}"

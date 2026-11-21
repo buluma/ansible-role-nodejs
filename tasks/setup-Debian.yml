@@ -127,6 +127,18 @@
         group: root
         mode: "0644"
   always:
+    - name: setup-Debian | Stop the gpg-agent started by the key import
+      ansible.builtin.command:
+        argv:
+          - gpgconf
+          - --homedir
+          - "{{ nodejs_key_dir.path }}"
+          - --kill
+          - gpg-agent
+      changed_when: false
+      failed_when: false
+      when: nodejs_key_dir.path is defined
+
     - name: setup-Debian | Remove temporary directory for the Nodesource GPG key.
       ansible.builtin.file:
         path: "{{ nodejs_key_dir.path }}"
