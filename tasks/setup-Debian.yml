@@ -12,17 +12,82 @@
     state: directory
     mode: "0755"
 
-- name: setup-Debian | Download Nodesource GPG key.
-  ansible.builtin.get_url:
-    url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
-    dest: /tmp/nodesource.asc
-    mode: "0644"
-
-- name: setup-Debian | Dearmor Nodesource GPG key.
-  ansible.builtin.command:
-    cmd: gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg /tmp/nodesource.asc
-    creates: /etc/apt/keyrings/nodesource.gpg
+- name: setup-Debian | Create temporary directory for the Nodesource GPG key.
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: nodesource-key-
+  register: nodejs_key_dir
   changed_when: false
+
+# The key is fetched into a private temporary directory and only installed when
+# it holds exactly one key and the fingerprint of that key is the one NodeSource
+# signs its repository with. It is installed (dearmored) to the path earlier
+# versions of this role used, so existing installs are updated in place.
+- name: setup-Debian | Verify and install Nodesource GPG key.
+  vars:
+    nodejs_apt_key_fingerprint: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
+  block:
+    - name: setup-Debian | Download Nodesource GPG key.
+      ansible.builtin.get_url:
+        url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
+        dest: "{{ nodejs_key_dir.path }}/key.asc"
+        mode: "0600"
+      changed_when: false
+      register: nodejs_key_download
+      until: nodejs_key_download is succeeded
+
+    - name: setup-Debian | Read Nodesource GPG key fingerprints.
+      ansible.builtin.command:
+        argv:
+          - gpg
+          - --show-keys
+          - --with-colons
+          - --with-fingerprint
+          - "{{ nodejs_key_dir.path }}/key.asc"
+      environment:
+        GNUPGHOME: "{{ nodejs_key_dir.path }}"
+      changed_when: false
+      register: nodejs_key_info
+
+    # In the colon listing the first fpr line is the fingerprint of the
+    # primary key, the ones after it belong to subkeys.
+    - name: setup-Debian | Verify Nodesource GPG key fingerprint.
+      ansible.builtin.assert:
+        that:
+          - nodejs_key_info.stdout_lines | select('match', '^(pub|sec):') | list | length == 1
+          - (nodejs_key_info.stdout_lines | select('match', '^fpr:') | first).split(':')[9] | upper == nodejs_apt_key_fingerprint
+        fail_msg: >-
+          The key downloaded from https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
+          is not a single key with fingerprint {{ nodejs_apt_key_fingerprint }}, refusing to trust it.
+        quiet: true
+
+    - name: setup-Debian | Dearmor Nodesource GPG key.
+      ansible.builtin.command:
+        argv:
+          - gpg
+          - --batch
+          - --dearmor
+          - -o
+          - "{{ nodejs_key_dir.path }}/key.gpg"
+          - "{{ nodejs_key_dir.path }}/key.asc"
+      environment:
+        GNUPGHOME: "{{ nodejs_key_dir.path }}"
+      changed_when: false
+
+    - name: setup-Debian | Install Nodesource GPG key.
+      ansible.builtin.copy:
+        src: "{{ nodejs_key_dir.path }}/key.gpg"
+        dest: /etc/apt/keyrings/nodesource.gpg
+        remote_src: true
+        owner: root
+        group: root
+        mode: "0644"
+  always:
+    - name: setup-Debian | Remove temporary directory for the Nodesource GPG key.
+      ansible.builtin.file:
+        path: "{{ nodejs_key_dir.path }}"
+        state: absent
+      changed_when: false
 
 - name: setup-Debian | Ensure python3-debian is present.
   ansible.builtin.package:
