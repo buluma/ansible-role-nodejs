@@ -21,8 +21,9 @@
 
 # The key is fetched into a private temporary directory and only installed when
 # it holds exactly one key and the fingerprint of that key is the one NodeSource
-# signs its repository with. It is installed (dearmored) to the path earlier
-# versions of this role used, so existing installs are updated in place.
+# signs its repository with. That key is then exported from a temporary keyring
+# (binary, so no dearmoring) to the path earlier versions of this role used, so
+# existing installs are updated in place.
 - name: setup-Debian | Verify and install Nodesource GPG key.
   vars:
     nodejs_apt_key_fingerprint: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
@@ -61,28 +62,83 @@
           is not a single key with fingerprint {{ nodejs_apt_key_fingerprint }}, refusing to trust it.
         quiet: true
 
-    - name: setup-Debian | Dearmor Nodesource GPG key.
+    # Install only the key that was checked, not the downloaded bytes. gpg here
+    # and apt later could read a crafted file differently, and a keyserver
+    # answers with different signatures and armor on each fetch, which would
+    # report a change on every run. The export is not armored: this is the
+    # binary keyring apt expects at a .gpg path.
+    - name: setup-Debian | Import the verified Nodesource GPG key into a temporary keyring.
       ansible.builtin.command:
         argv:
           - gpg
           - --batch
-          - --dearmor
-          - -o
-          - "{{ nodejs_key_dir.path }}/key.gpg"
+          - --import
           - "{{ nodejs_key_dir.path }}/key.asc"
       environment:
         GNUPGHOME: "{{ nodejs_key_dir.path }}"
       changed_when: false
 
+    - name: setup-Debian | Export only the verified Nodesource GPG key.
+      ansible.builtin.command:
+        argv:
+          - gpg
+          - --batch
+          - --export
+          - --export-options
+          - export-minimal
+          - --output
+          - "{{ nodejs_key_dir.path }}/verified.gpg"
+          - "{{ nodejs_apt_key_fingerprint }}"
+      environment:
+        GNUPGHOME: "{{ nodejs_key_dir.path }}"
+      changed_when: false
+
+    # Fails when gpg could not use the key, e.g. a skipped packet left the
+    # export empty or without the primary key.
+    - name: setup-Debian | Read exported Nodesource GPG key fingerprints.
+      ansible.builtin.command:
+        argv:
+          - gpg
+          - --show-keys
+          - --with-colons
+          - --with-fingerprint
+          - "{{ nodejs_key_dir.path }}/verified.gpg"
+      environment:
+        GNUPGHOME: "{{ nodejs_key_dir.path }}"
+      changed_when: false
+      register: nodejs_key_export_info
+
+    - name: setup-Debian | Verify exported Nodesource GPG key fingerprint.
+      ansible.builtin.assert:
+        that:
+          - nodejs_key_export_info.stdout_lines | select('match', '^(pub|sec):') | list | length == 1
+          - (nodejs_key_export_info.stdout_lines | select('match', '^fpr:') | first).split(':')[9] | upper == nodejs_apt_key_fingerprint
+        fail_msg: >-
+          The key exported for {{ nodejs_apt_key_fingerprint }} is not a single key
+          with that fingerprint, refusing to install it.
+        quiet: true
+
     - name: setup-Debian | Install Nodesource GPG key.
       ansible.builtin.copy:
-        src: "{{ nodejs_key_dir.path }}/key.gpg"
+        src: "{{ nodejs_key_dir.path }}/verified.gpg"
         dest: /etc/apt/keyrings/nodesource.gpg
         remote_src: true
         owner: root
         group: root
         mode: "0644"
   always:
+    - name: setup-Debian | Stop the gpg-agent started by the key import
+      ansible.builtin.command:
+        argv:
+          - gpgconf
+          - --homedir
+          - "{{ nodejs_key_dir.path }}"
+          - --kill
+          - gpg-agent
+      changed_when: false
+      failed_when: false
+      when: nodejs_key_dir.path is defined
+
     - name: setup-Debian | Remove temporary directory for the Nodesource GPG key.
       ansible.builtin.file:
         path: "{{ nodejs_key_dir.path }}"
