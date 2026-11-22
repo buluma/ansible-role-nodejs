@@ -31,6 +31,16 @@
   when: nodejs_rhel_legacy_layout
   register: node_repo
 
+# The release RPM has the same version for each Node.js major, so dnf does
+# not replace its repository file when switching between legacy versions.
+- name: setup-RedHat | Select the requested legacy Nodesource repository.
+  ansible.builtin.replace:
+    path: "/etc/yum.repos.d/nodesource-el{{ ansible_facts['distribution_major_version'] }}.repo"
+    regexp: '^(baseurl=https://rpm\.nodesource\.com/)pub_[^/]+(/el/)'
+    replace: '\g<1>{{ nodejs_rhel_rpm_dir }}\g<2>'
+  when: nodejs_rhel_legacy_layout
+  register: node_repo_version
+
 # The key is imported up front so the package signature check below does not need
 # an interactive key import.
 - name: setup-RedHat | Import Nodesource RPM key (22.x and later).
@@ -63,7 +73,7 @@
 
 - name: setup-RedHat | Update package cache if repo was added.
   ansible.builtin.yum: update_cache=true
-  when: node_repo is changed or node_repo_nodistro is changed
+  when: node_repo is changed or node_repo_version is changed or node_repo_nodistro is changed
   tags: ["skip_ansible_lint"]
 
 - name: setup-RedHat | Ensure Node.js AppStream module is disabled (CentOS 8+).
