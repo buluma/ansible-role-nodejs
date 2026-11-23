@@ -148,7 +148,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|10, 9|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|9|
 |[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 |[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
